@@ -1,0 +1,14 @@
+
+name: simple echo statement
+
+on:
+  push:
+
+jobs:
+  simple-echo:
+    name: echo statement
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: echo statement
+      run: echo "hello world"
