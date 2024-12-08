@@ -1,7 +1,7 @@
 name: CI Pipeline for Express App
 
 on:
-  create:
+  push:
     branches:
       - '**' # Matches any branch
 
