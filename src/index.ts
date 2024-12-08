@@ -5,7 +5,7 @@ import { startInstrumentation } from "./instrumentataion";
 import {trace, Span,SpanStatusCode,SpanKind} from '@opentelemetry/api';
 
 
-const startUP = async (portNumber?: number) => {
+const startUP = async (portNumber?: number) => {;
 
   const tracer = trace.getTracer('start-up-operation');
 
