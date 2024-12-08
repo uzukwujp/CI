@@ -24,15 +24,15 @@ jobs:
 
       # Install dependencies
       - name: Install Dependencies
-        run: cd post-app && npm install
+        run: npm install
 
       # Build the TypeScript project
       - name: Build Application
-        run: cd post-app && npm run build
+        run: npm run build
 
       # Run unit tests
       - name: Run Tests
-        run: cd post-app && echo run unit test
+        run: echo run unit test
 
       # Run static security scan using Snyk
       - name: Static Security Test
