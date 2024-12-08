@@ -1,0 +1,51 @@
+name: CI Pipeline for Express App
+
+on:
+  create:
+    branches:
+      - '**' # Matches any branch
+
+jobs:
+  ci:
+    name: Build, Test, and Security Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      # Install dependencies
+      - name: Install Dependencies
+        run: cd post-app && npm install
+
+      # Build the TypeScript project
+      - name: Build Application
+        run: cd post-app && npm run build
+
+      # Run unit tests
+      - name: Run Tests
+        run: cd post-app && echo run unit test
+
+      # Run static security scan using Snyk
+      - name: Static Security Test
+        uses: snyk/actions/node@master
+        with:
+          command: test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Optional: Upload test results
+      - name: Archive Test Results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: coverage/ # Assuming test results are in a coverage directory

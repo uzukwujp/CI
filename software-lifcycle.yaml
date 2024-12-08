@@ -1,0 +1,22 @@
+
+plan stage -> write code -> test -> Deploy
+
+winterfall 
+
+lets say 10 features 
+
+
+-  Agile
+
+- colloboration, small incremental changes, continous improvement, fast feedback
+
+* Scrum
+* Kanban
+
+-  CI - Continous Integration
+
+5 developers 
+
+- write code for a particular feature
+
+-  we need to merge their code together
