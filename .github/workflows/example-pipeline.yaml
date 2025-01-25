@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - '**' # Matches any branch
+env:
+  AWS_DEFAULT_REGION: "us-east-1"
+  ECR_URI: 058264206227.dkr.ecr.us-east-1.amazonaws.com/knowledgecity
 
 jobs:
   ci:
@@ -37,6 +40,31 @@ jobs:
       # Run static security scan using Snyk
       - name: Static Security Test
         run: echo run static security test
+
+  build-image:
+    name: build and push docker image into ECR registry
+    needs: ci
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials" Action for GitHub Actions
+        uses: aws-actions/configure-aws-credentials@v4.0.2
+
+      - name: login to ECR to get token
+        run:  aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $ECR_URI
+
+      - name: build the image
+        run: docker build -t $ECR_URI:latest .
+
+      - name: push the image to ECR registry
+        run: docker push $ECR_URI:latest
+
+
+
+        
         
 
       
