@@ -40,6 +40,7 @@ jobs:
       # Run static security scan using Snyk
       - name: Static Security Test
         run: echo run static security test
+        
 
   build-image:
     name: build and push docker image into ECR registry
